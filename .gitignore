@@ -2,3 +2,4 @@
 *.log
 .composer/
 .phpunit.result.cache
+.idea

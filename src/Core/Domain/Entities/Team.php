@@ -3,6 +3,8 @@
 namespace Core\Domain\Entities;
 
 use Core\Domain\Entities\Traits\MagicsMethodsTrait;
+use Core\Domain\Exceptions\EntityValidationException;
+use Core\Domain\Validations\DomainValidation;
 use InvalidArgumentException;
 
 class Team
@@ -29,18 +31,23 @@ class Team
 
     public function update(string $description): void
     {
-        $this->validate();
-
         $this->description = $description;
+        
+        $this->validate();
     }
 
     public function validate()
     {
+        DomainValidation::lowerThan($this->description);
+        DomainValidation::greaterThan($this->description);
+        
         if (
             ! $this->id &&
             ! $this->isActive
         ) {
-            throw new InvalidArgumentException('Sorry, it\'s not possible to create a team with isActive property false, just update it.');
+            throw new InvalidArgumentException(
+                'Cannot create a team with isActive property false, just update it.'
+            );
         }
     }
 }
