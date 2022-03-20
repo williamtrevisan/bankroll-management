@@ -52,7 +52,7 @@ class TeamUnitTest extends TestCase
     {
         try {
             new Team(
-                description: 'I',
+                description: random_bytes(1),
             );
 
             $this->assertTrue(false);
@@ -65,7 +65,7 @@ class TeamUnitTest extends TestCase
         }
     }
 
-    public function testMustReturnExceptionIfLengthDescriptionIsLowerThan255()
+    public function testMustReturnExceptionIfLengthDescriptionIsGreaterThan255()
     {
         try {
             new Team(
