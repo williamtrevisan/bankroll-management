@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Unit\Domain\Entity;
+namespace Tests\Unit\Domain\Entities;
 
 use PHPUnit\Framework\TestCase;
-use Core\Domain\Entity\Team;
+use Core\Domain\Entities\Team;
 use InvalidArgumentException;
 use Throwable;
 
@@ -38,10 +38,10 @@ class TeamUnitTest extends TestCase
             );
 
             $this->assertTrue(false);
-        } catch (Throwable $throwable) {
+        } catch (Throwable $th) {
             $this->assertInstanceOf(
                 InvalidArgumentException::class,
-                $throwable, 
+                $th, 
                 'Sorry, it\'s not possible to create a team with the isActive property false, just update it.'
             );
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Domain\Entity\Traits;
+namespace Core\Domain\Entities\Traits;
 
 use Exception;
 

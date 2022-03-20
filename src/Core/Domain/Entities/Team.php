@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Domain\Entity;
+namespace Core\Domain\Entities;
 
-use Core\Domain\Entity\Traits\MagicsMethodsTrait;
+use Core\Domain\Entities\Traits\MagicsMethodsTrait;
 use InvalidArgumentException;
 
 class Team
