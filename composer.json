@@ -1,0 +1,16 @@
+{
+    "name": "williamtrevisan/banroll-management",
+    "description": "App With PHP - Bankroll Management",
+    "authors": [
+        {
+            "name": "William Trevisan",
+            "email": "williamtrev@hotmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Core\\": "src/Core"
+        }
+    },
+    "require": {}
+}
