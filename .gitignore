@@ -1,3 +1,4 @@
 /vendor/
 *.log
 .composer/
+.phpunit.result.cache
