@@ -16,4 +16,9 @@ trait MagicsMethodsTrait
 
         return $this->{$property};
     }
+    
+    public function id(): string
+    {
+        return (string) $this->id;
+    }
 }

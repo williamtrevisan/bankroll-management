@@ -5,7 +5,7 @@ namespace Unit\Domain\Entities;
 use Core\Domain\Exceptions\EntityValidationException;
 use PHPUnit\Framework\TestCase;
 use Core\Domain\Entities\Team;
-use InvalidArgumentException;
+use Ramsey\Uuid\Uuid;
 use Throwable;
 
 class TeamUnitTest extends TestCase
@@ -17,6 +17,7 @@ class TeamUnitTest extends TestCase
             isActive: true,
         );
 
+        $this->assertNotEmpty($team->id());
         $this->assertEquals('Internacional', $team->description);
         $this->assertTrue($team->isActive);
     }
@@ -28,24 +29,6 @@ class TeamUnitTest extends TestCase
         );
 
         $this->assertTrue($team->isActive);
-    }
-
-    public function testShouldNotBeAbleInstantiateTeamClassWithIsActiveFalse()
-    {
-        try {
-            new Team(
-                description: 'Internacional',
-                isActive: false,
-            );
-
-            $this->assertTrue(false);
-        } catch (Throwable $th) {
-            $this->assertInstanceOf(
-                InvalidArgumentException::class,
-                $th,
-                'Cannot create a team with isActive property false, just update it.'
-            );
-        }
     }
     
     public function testMustReturnExceptionIfLengthDescriptionIsLowerThan2()
@@ -109,12 +92,17 @@ class TeamUnitTest extends TestCase
 
     public function testShouldBeAbleToUpdateATeam()
     {
+        $uuid = Uuid::uuid4()->toString();
+        
         $team = new Team(
             description: 'Internacional',
+            isActive: true,
+            id: $uuid,
         );
 
         $team->update('Palmeiras');
 
+        $this->assertEquals($uuid, $team->id());
         $this->assertEquals('Palmeiras', $team->description);
     }
 }

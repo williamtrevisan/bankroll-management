@@ -3,8 +3,8 @@
 namespace Core\Domain\Entities;
 
 use Core\Domain\Entities\Traits\MagicsMethodsTrait;
-use Core\Domain\Exceptions\EntityValidationException;
 use Core\Domain\Validations\DomainValidation;
+use Core\Domain\ValuesObjects\Uuid;
 use InvalidArgumentException;
 
 class Team
@@ -14,8 +14,10 @@ class Team
     public function __construct (
         protected string $description,
         protected bool $isActive = true,
-        protected string $id = '',
+        protected Uuid|string $id = '',
     ) {
+        $this->id = $this->id ? new Uuid($this->id) : Uuid::uuid4();
+        
         $this->validate();
     }
 
@@ -40,14 +42,5 @@ class Team
     {
         DomainValidation::lowerThan($this->description);
         DomainValidation::greaterThan($this->description);
-        
-        if (
-            ! $this->id &&
-            ! $this->isActive
-        ) {
-            throw new InvalidArgumentException(
-                'Cannot create a team with isActive property false, just update it.'
-            );
-        }
     }
 }

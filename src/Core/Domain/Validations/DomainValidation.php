@@ -6,19 +6,6 @@ use Core\Domain\Exceptions\EntityValidationException;
 
 class DomainValidation
 {
-    public static function invalidActivePropertyValue(
-        $value,
-        $message = null
-    ): EntityValidationException|null {
-        if (! $value) {
-            throw new EntityValidationException(
-                $message ?? 'Cannot create with isActive property false, just update it.'
-            );
-        }
-
-        return null;
-    }
-    
     public static function greaterThan(
         string $value,
         string $message = null,

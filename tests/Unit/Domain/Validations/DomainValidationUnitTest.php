@@ -9,41 +9,6 @@ use Throwable;
 
 class DomainValidationUnitTest extends TestCase
 {
-    public function testMustReturnExceptionIfIsActivePropertyEqualsToFalse()
-    {
-        try {
-            $value = false;
-
-            DomainValidation::invalidActivePropertyValue($value);
-
-            $this->assertTrue(false);
-        } catch (Throwable $th) {
-            $this->assertInstanceOf(
-                EntityValidationException::class,
-                $th,
-                'Cannot create with isActive property false, just update it.'
-            );
-        }
-    }
-
-    public function testMustReturnExceptionIfIsActivePropertyEqualsToFalseAndSpecificMessage()
-    {
-        try {
-            $value = false;
-            $message = 'Cannot create a team with isActive property false, just update it.';
-
-            DomainValidation::invalidActivePropertyValue($value, $message);
-
-            $this->assertTrue(false);
-        } catch (Throwable $th) {
-            $this->assertInstanceOf(
-                EntityValidationException::class,
-                $th,
-                'Cannot create a team with isActive property false, just update it.'
-            );
-        }
-    }
-    
     public function testMustReturnExceptionIfValueGreaterThanMaxLength()
     {
         try {
