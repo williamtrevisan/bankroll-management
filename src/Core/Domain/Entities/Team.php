@@ -5,7 +5,7 @@ namespace Core\Domain\Entities;
 use Core\Domain\Entities\Traits\MagicsMethodsTrait;
 use Core\Domain\Validations\DomainValidation;
 use Core\Domain\ValuesObjects\Uuid;
-use InvalidArgumentException;
+use DateTime;
 
 class Team
 {
@@ -15,8 +15,13 @@ class Team
         protected string $description,
         protected bool $isActive = true,
         protected Uuid|string $id = '',
+        protected DateTime|string $createdAt = '',
     ) {
         $this->id = $this->id ? new Uuid($this->id) : Uuid::uuid4();
+        $this->createdAt =
+            $this->createdAt 
+                ? new DateTime($this->createdAt) 
+                : new DateTime();
         
         $this->validate();
     }

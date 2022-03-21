@@ -17,9 +17,10 @@ class TeamUnitTest extends TestCase
             isActive: true,
         );
 
-        $this->assertNotEmpty($team->id());
         $this->assertEquals('Internacional', $team->description);
         $this->assertTrue($team->isActive);
+        $this->assertNotEmpty($team->id());
+        $this->assertNotEmpty($team->createdAt());
     }
 
     public function testShouldBeAbleInstantiateTeamClassWithIsActiveTrueByDefault()
@@ -98,6 +99,7 @@ class TeamUnitTest extends TestCase
             description: 'Internacional',
             isActive: true,
             id: $uuid,
+            createdAt: '2023-01-01 12:13:12'
         );
 
         $team->update('Palmeiras');
