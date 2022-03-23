@@ -30,8 +30,6 @@ class CreateTeamUseCaseUnitTest extends TestCase
         $this->assertEquals('Internacional', $response->description);
         $this->assertEquals($uuid, $response->id);
         $this->assertTrue($response->is_active);
-        
-        Mockery::close();
     }
     
     public function testShouldBeAbleToSpyIfSaveMethodHasBeenCalled()
@@ -48,5 +46,12 @@ class CreateTeamUseCaseUnitTest extends TestCase
 
         $teamRepositorySpy->shouldHaveReceived('save');
         $this->assertTrue(true);
+    }
+    
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        
+        parent::tearDown();
     }
 }
