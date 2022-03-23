@@ -43,7 +43,7 @@ class Team
         $this->validate();
     }
 
-    public function validate()
+    private function validate(): void
     {
         DomainValidation::lowerThan($this->description);
         DomainValidation::greaterThan($this->description);
