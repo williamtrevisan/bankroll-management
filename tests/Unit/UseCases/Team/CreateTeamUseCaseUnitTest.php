@@ -45,8 +45,8 @@ class CreateTeamUseCaseUnitTest extends TestCase
 
         $createTeamUseCase = new CreateTeamUseCase($teamRepositorySpy);
         $createTeamUseCase->execute($createTeamInputDTO);
-        
-        $spy->shouldHaveReceived('save');
+
+        $teamRepositorySpy->shouldHaveReceived('save');
         $this->assertTrue(true);
     }
 }
