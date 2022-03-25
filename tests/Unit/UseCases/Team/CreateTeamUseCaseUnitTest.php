@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit\UseCases\Team;
+namespace Tests\Unit\UseCases\Team;
 
 use Core\Domain\Entities\Team;
 use Core\Domain\Repositories\TeamRepositoryInterface;
@@ -22,16 +22,16 @@ class CreateTeamUseCaseUnitTest extends TestCase
         $teamRepository = Mockery::mock(stdClass::class, TeamRepositoryInterface::class);
         $teamRepository->shouldReceive('save')->andReturn($teamEntity);
         $createTeamInputDTO = Mockery::mock(CreateTeamInputDTO::class, ['Internacional']);
-        
+
         $createTeamUseCase = new CreateTeamUseCase($teamRepository);
         $response = $createTeamUseCase->execute($createTeamInputDTO);
-        
+
         $this->assertInstanceOf(CreateTeamOutputDTO::class, $response);
         $this->assertEquals('Internacional', $response->description);
         $this->assertEquals($uuid, $response->id);
         $this->assertTrue($response->is_active);
     }
-    
+
     public function testShouldBeAbleToSpyIfSaveMethodHasBeenCalled()
     {
         $uuid = Uuid::uuid4()->toString();
@@ -47,11 +47,11 @@ class CreateTeamUseCaseUnitTest extends TestCase
         $teamRepositorySpy->shouldHaveReceived('save');
         $this->assertTrue(true);
     }
-    
+
     protected function tearDown(): void
     {
         Mockery::close();
-        
+
         parent::tearDown();
     }
 }

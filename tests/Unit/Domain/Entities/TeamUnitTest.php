@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit\Domain\Entities;
+namespace Tests\Unit\Domain\Entities;
 
 use Core\Domain\Exceptions\EntityValidationException;
 use PHPUnit\Framework\TestCase;
@@ -31,7 +31,7 @@ class TeamUnitTest extends TestCase
 
         $this->assertTrue($team->isActive);
     }
-    
+
     public function testMustReturnExceptionIfLengthDescriptionIsLowerThan2()
     {
         try {
@@ -94,7 +94,7 @@ class TeamUnitTest extends TestCase
     public function testShouldBeAbleToUpdateATeam()
     {
         $uuid = Uuid::uuid4()->toString();
-        
+
         $team = new Team(
             description: 'Internacional',
             isActive: true,

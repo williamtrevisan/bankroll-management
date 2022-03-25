@@ -1,6 +1,6 @@
 <?php
 
-namespace Unit\Domain\Validations;
+namespace Tests\Unit\Domain\Validations;
 
 use Core\Domain\Exceptions\EntityValidationException;
 use Core\Domain\Validations\DomainValidation;
@@ -13,9 +13,9 @@ class DomainValidationUnitTest extends TestCase
     {
         try {
             $value = random_bytes(256);
-            
+
             DomainValidation::greaterThan($value);
-            
+
             $this->assertTrue(false);
         } catch (Throwable $th) {
             $this->assertInstanceOf(
