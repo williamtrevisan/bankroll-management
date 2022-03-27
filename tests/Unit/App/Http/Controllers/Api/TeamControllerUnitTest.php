@@ -3,7 +3,7 @@
 namespace Tests\Unit\App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\TeamController;
+use App\Http\Controllers\Api\TeamController;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Team as TeamModel;
 use App\Repositories\Eloquent\TeamEloquentRepository;
