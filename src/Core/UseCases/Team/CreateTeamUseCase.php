@@ -10,7 +10,7 @@ use Core\UseCases\Team\dtos\CreateTeamOutputDTO;
 class CreateTeamUseCase
 {
     public function __construct(
-       protected readonly TeamRepositoryInterface $teamRepository 
+       protected readonly TeamRepositoryInterface $teamRepository
     ) {}
 
     public function execute(CreateTeamInputDTO $input): CreateTeamOutputDTO
@@ -19,9 +19,9 @@ class CreateTeamUseCase
             description: $input->description,
             isActive: $input->isActive,
         );
-        
-        $team = $this->teamRepository->save($data);
-        
+
+        $team = $this->teamRepository->create($data);
+
         return new CreateTeamOutputDTO(
             id: $team->id(),
             description: $team->description,

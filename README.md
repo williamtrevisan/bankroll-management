@@ -25,8 +25,8 @@ DB_CONNECTION=postgres
 DB_HOST=db
 DB_PORT=5432
 DB_DATABASE=bankroll_management
-DB_USERNAME=root
-DB_PASSWORD=root
+DB_USERNAME=postgres
+DB_PASSWORD=postgres
 ```
 
 Suba os containers do projeto

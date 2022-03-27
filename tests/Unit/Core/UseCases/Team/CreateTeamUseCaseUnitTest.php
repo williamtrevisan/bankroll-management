@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\UseCases\Team;
+namespace Tests\Unit\Core\UseCases\Team;
 
 use Core\Domain\Entities\Team;
 use Core\Domain\Repositories\TeamRepositoryInterface;
@@ -20,7 +20,7 @@ class CreateTeamUseCaseUnitTest extends TestCase
         $teamEntity = Mockery::mock(Team::class, ['Internacional']);
         $teamEntity->shouldReceive('id')->andReturn($uuid);
         $teamRepository = Mockery::mock(stdClass::class, TeamRepositoryInterface::class);
-        $teamRepository->shouldReceive('save')->andReturn($teamEntity);
+        $teamRepository->shouldReceive('create')->andReturn($teamEntity);
         $createTeamInputDTO = Mockery::mock(CreateTeamInputDTO::class, ['Internacional']);
 
         $createTeamUseCase = new CreateTeamUseCase($teamRepository);
@@ -38,13 +38,13 @@ class CreateTeamUseCaseUnitTest extends TestCase
         $teamEntity = Mockery::mock(Team::class, ['Internacional']);
         $teamEntity->shouldReceive('id')->andReturn($uuid);
         $teamRepositorySpy = Mockery::spy(stdClass::class, TeamRepositoryInterface::class);
-        $teamRepositorySpy->shouldReceive('save')->andReturn($teamEntity);
+        $teamRepositorySpy->shouldReceive('create')->andReturn($teamEntity);
         $createTeamInputDTO = Mockery::mock(CreateTeamInputDTO::class, ['Internacional']);
 
         $createTeamUseCase = new CreateTeamUseCase($teamRepositorySpy);
         $createTeamUseCase->execute($createTeamInputDTO);
 
-        $teamRepositorySpy->shouldHaveReceived('save');
+        $teamRepositorySpy->shouldHaveReceived('create');
         $this->assertTrue(true);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Domain\ValuesObjects;
+namespace Core\Domain\ValueObjects;
 
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
@@ -17,12 +17,12 @@ class Uuid
     {
         return $this->value;
     }
-    
+
     public static function uuid4(): self
     {
         return new self(RamseyUuid::uuid4()->toString());
     }
-    
+
     private function ensureIsValid(string $id): InvalidArgumentException|null
     {
         if (! RamseyUuid::isValid($id)) {
@@ -30,7 +30,7 @@ class Uuid
                 sprintf('<%s> does not allow the value <%s>.', static::class, $id)
             );
         }
-        
+
         return null;
     }
 }

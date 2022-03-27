@@ -2,16 +2,25 @@
 
 namespace Tests\Feature\App\Repositories\Eloquent;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Models\Team as TeamModel;
+use App\Repositories\Eloquent\TeamEloquentRepository;
+use Core\Domain\Entities\Team as TeamEntity;
+use Core\Domain\Repositories\TeamRepositoryInterface;
 use Tests\TestCase;
 
 class TeamEloquentRepositoryIntegrationTest extends TestCase
 {
-    public function test_example()
+    public function testShouldBeAbleToCreateANewTeam()
     {
-        $response = $this->get('/');
+        $teamEloquentRepository = new TeamEloquentRepository(new TeamModel());
+        $teamEntity = new TeamEntity(
+            description: 'Internacional',
+        );
 
-        $response->assertStatus(200);
+        $response = $teamEloquentRepository->create($teamEntity);
+
+        $this->assertInstanceOf(TeamRepositoryInterface::class, $teamEloquentRepository);
+        $this->assertInstanceOf(TeamEntity::class, $response);
+        $this->assertDatabaseHas('teams', ['description' => $teamEntity->description]);
     }
 }

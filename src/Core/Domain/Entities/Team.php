@@ -4,7 +4,7 @@ namespace Core\Domain\Entities;
 
 use Core\Domain\Entities\Traits\MagicsMethodsTrait;
 use Core\Domain\Validations\DomainValidation;
-use Core\Domain\ValuesObjects\Uuid;
+use Core\Domain\ValueObjects\Uuid;
 use DateTime;
 
 class Team
@@ -19,10 +19,10 @@ class Team
     ) {
         $this->id = $this->id ? new Uuid($this->id) : Uuid::uuid4();
         $this->createdAt =
-            $this->createdAt 
-                ? new DateTime($this->createdAt) 
+            $this->createdAt
+                ? new DateTime($this->createdAt)
                 : new DateTime();
-        
+
         $this->validate();
     }
 
@@ -39,7 +39,7 @@ class Team
     public function update(string $description): void
     {
         $this->description = $description;
-        
+
         $this->validate();
     }
 
