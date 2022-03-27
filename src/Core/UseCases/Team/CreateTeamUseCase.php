@@ -26,6 +26,7 @@ class CreateTeamUseCase
             id: $team->id(),
             description: $team->description,
             is_active: $team->isActive,
+            created_at: $team->createdAt(),
         );
     }
 }

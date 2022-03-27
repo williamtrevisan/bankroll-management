@@ -8,7 +8,7 @@ use Core\Domain\Entities\Team as TeamEntity;
 use Core\Domain\Repositories\TeamRepositoryInterface;
 use Tests\TestCase;
 
-class TeamEloquentRepositoryIntegrationTest extends TestCase
+class TeamEloquentRepositoryTest extends TestCase
 {
     public function testShouldBeAbleToCreateANewTeam()
     {

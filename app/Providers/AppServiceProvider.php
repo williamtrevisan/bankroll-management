@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Eloquent\TeamEloquentRepository;
+use Core\Domain\Repositories\TeamRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(
+            TeamRepositoryInterface::class,
+            TeamEloquentRepository::class
+        );
     }
 
     /**

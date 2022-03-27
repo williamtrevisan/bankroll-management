@@ -21,9 +21,17 @@ class TeamEloquentRepository implements TeamRepositoryInterface
             'created_at' => $team->createdAt(),
         ]);
 
-        return new TeamEntity(
-            description: $team->description,
-            id: $team->id,
+        return $this->toTeam($team);
+    }
+
+    private function toTeam(object $object): TeamEntity
+    {
+        $teamEntity = new TeamEntity(
+            description: $object->description,
+            id: $object->id,
         );
+        ((bool) $object->is_active) ? $teamEntity->enable() : $teamEntity->disable();
+
+        return $teamEntity;
     }
 }

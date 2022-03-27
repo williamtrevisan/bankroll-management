@@ -9,7 +9,7 @@ use Core\UseCases\Team\dtos\CreateTeamInputDTO;
 use Core\UseCases\Team\dtos\CreateTeamOutputDTO;
 use Tests\TestCase;
 
-class CreateTeamUseCaseIntegrationTest extends TestCase
+class CreateTeamUseCaseTest extends TestCase
 {
     public function testShouldBeAbleToCreateANewTeam()
     {

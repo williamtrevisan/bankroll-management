@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Core\UseCases\Team;
 
+use Carbon\Carbon;
 use Core\Domain\Entities\Team;
 use Core\Domain\Repositories\TeamRepositoryInterface;
 use Core\UseCases\Team\CreateTeamUseCase;
@@ -17,8 +18,10 @@ class CreateTeamUseCaseUnitTest extends TestCase
     public function testShouldBeAbleToCreateANewTeam()
     {
         $uuid = Uuid::uuid4()->toString();
+        $createdAt = '2022-03-27 00:00:00';
         $teamEntity = Mockery::mock(Team::class, ['Internacional']);
         $teamEntity->shouldReceive('id')->andReturn($uuid);
+        $teamEntity->shouldReceive('createdAt')->andReturn($createdAt);
         $teamRepository = Mockery::mock(stdClass::class, TeamRepositoryInterface::class);
         $teamRepository->shouldReceive('create')->andReturn($teamEntity);
         $createTeamInputDTO = Mockery::mock(CreateTeamInputDTO::class, ['Internacional']);
@@ -32,11 +35,13 @@ class CreateTeamUseCaseUnitTest extends TestCase
         $this->assertTrue($response->is_active);
     }
 
-    public function testShouldBeAbleToSpyIfSaveMethodHasBeenCalled()
+    public function testShouldBeAbleToSpyIfCreateMethodHasBeenCalled()
     {
         $uuid = Uuid::uuid4()->toString();
+        $createdAt = '2022-03-27 00:00:00';
         $teamEntity = Mockery::mock(Team::class, ['Internacional']);
         $teamEntity->shouldReceive('id')->andReturn($uuid);
+        $teamEntity->shouldReceive('createdAt')->andReturn($createdAt);
         $teamRepositorySpy = Mockery::spy(stdClass::class, TeamRepositoryInterface::class);
         $teamRepositorySpy->shouldReceive('create')->andReturn($teamEntity);
         $createTeamInputDTO = Mockery::mock(CreateTeamInputDTO::class, ['Internacional']);
