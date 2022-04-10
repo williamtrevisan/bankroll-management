@@ -12,12 +12,15 @@ use Core\UseCases\Team\dtos\Create\CreateTeamInputDTO;
 use Core\UseCases\Team\dtos\TeamInputDTO;
 use Core\UseCases\Team\dtos\Update\UpdateTeamInputDTO;
 use Core\UseCases\Team\UpdateTeamUseCase;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class TeamController extends Controller
 {
-    public function store(StoreTeamRequest $request, CreateTeamUseCase $createTeamUseCase)
-    {
+    public function store(
+        StoreTeamRequest $request,
+        CreateTeamUseCase $createTeamUseCase
+    ): JsonResponse {
         $response = $createTeamUseCase->execute(
             input: new CreateTeamInputDTO(
                 description: $request->description,
@@ -30,8 +33,11 @@ class TeamController extends Controller
             ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function update(UpdateTeamRequest $request, UpdateTeamUseCase $updateTeamUseCase, $id)
-    {
+    public function update(
+        UpdateTeamRequest $request,
+        UpdateTeamUseCase $updateTeamUseCase,
+        string $id
+    ): JsonResponse {
         $response = $updateTeamUseCase->execute(
             input: new UpdateTeamInputDTO(
                 id: $id,
@@ -43,8 +49,10 @@ class TeamController extends Controller
             ->response();
     }
 
-    public function destroy(DeleteTeamUseCase $deleteTeamUseCase, $id)
-    {
+    public function destroy(
+        DeleteTeamUseCase $deleteTeamUseCase,
+        string $id
+    ): Response {
         $deleteTeamUseCase->execute(new TeamInputDTO($id));
 
         return response()->noContent();
