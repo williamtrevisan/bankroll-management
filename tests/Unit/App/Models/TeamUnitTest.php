@@ -6,54 +6,37 @@ use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use PHPUnit\Framework\TestCase;
 
-class TeamUnitTest extends TestCase
+class TeamUnitTest extends ModelTestCase
 {
-    public function testMustTeamModelUseHasFactoryAndSoftDeletesTraits()
+    protected function getModel(): Model
     {
-        $traitsExpected = [
+        return new Team();
+    }
+
+    protected function getExpectedTraits(): array
+    {
+        return [
             HasFactory::class,
             SoftDeletes::class
         ];
-        $teamModelTraits = class_uses($this->teamModel());
-
-        $this->assertEqualsCanonicalizing($traitsExpected, $teamModelTraits);
     }
 
-    public function testMustTeamModelHaveAImplementingPropertyLikeFalse()
+    protected function getExpectedFillables(): array
     {
-        $teamModelIncrementingProperty = $this->teamModel()->incrementing;
-
-        $this->assertFalse($teamModelIncrementingProperty);
-    }
-
-    public function testMustTeamModelHaveIdDescriptionAndIsActiveOnFillableProperty()
-    {
-        $fillablesExpected = [
+        return [
             'id',
             'description',
             'is_active'
         ];
-        $teamModelFillables = $this->teamModel()->getFillable();
-
-        $this->assertEquals($fillablesExpected, $teamModelFillables);
     }
 
-    public function testMustTeamModelHaveCastsForIdIsActiveAndDeletedAt()
+    protected function getExpectedCasts(): array
     {
-        $castsExpected = [
+        return [
             'id' => 'string',
             'is_active' => 'boolean',
             'deleted_at' => 'datetime'
         ];
-        $teamModelCasts = $this->teamModel()->getCasts();
-
-        $this->assertEquals($castsExpected, $teamModelCasts);
-    }
-
-    protected function teamModel(): Model
-    {
-        return new Team();
     }
 }
