@@ -3,15 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\StoreTeamRequest;
+use App\Http\Requests\UpdateTeamRequest;
 use App\Http\Resources\TeamResource;
 use Core\UseCases\Team\CreateTeamUseCase;
-use Core\UseCases\Team\dtos\CreateTeamInputDTO;
+use Core\UseCases\Team\DeleteTeamUseCase;
+use Core\UseCases\Team\dtos\Create\CreateTeamInputDTO;
+use Core\UseCases\Team\dtos\TeamInputDTO;
+use Core\UseCases\Team\dtos\Update\UpdateTeamInputDTO;
+use Core\UseCases\Team\UpdateTeamUseCase;
 use Illuminate\Http\Response;
 
 class TeamController extends Controller
 {
-    public function store(StoreCategoryRequest $request, CreateTeamUseCase $createTeamUseCase)
+    public function store(StoreTeamRequest $request, CreateTeamUseCase $createTeamUseCase)
     {
         $response = $createTeamUseCase->execute(
             input: new CreateTeamInputDTO(
@@ -23,5 +28,25 @@ class TeamController extends Controller
         return (new TeamResource($response))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function update(UpdateTeamRequest $request, UpdateTeamUseCase $updateTeamUseCase, $id)
+    {
+        $response = $updateTeamUseCase->execute(
+            input: new UpdateTeamInputDTO(
+                id: $id,
+                description: $request->description
+            )
+        );
+
+        return (new TeamResource($response))
+            ->response();
+    }
+
+    public function destroy(DeleteTeamUseCase $deleteTeamUseCase, $id)
+    {
+        $deleteTeamUseCase->execute(new TeamInputDTO($id));
+
+        return response()->noContent();
     }
 }

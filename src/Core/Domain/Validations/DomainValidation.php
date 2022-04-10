@@ -16,7 +16,7 @@ class DomainValidation
                 $message ?? "The value must not be greater than $maxLength characters."
             );
         }
-        
+
         return null;
     }
 
@@ -30,7 +30,7 @@ class DomainValidation
                 $message ?? "The value must not be lower than $minLength characters."
             );
         }
-        
+
         return null;
     }
 }

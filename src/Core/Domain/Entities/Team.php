@@ -12,9 +12,9 @@ class Team
     use MagicsMethodsTrait;
 
     public function __construct (
-        protected string $description,
-        protected bool $isActive = true,
         protected Uuid|string $id = '',
+        protected string $description = '',
+        protected bool $isActive = true,
         protected DateTime|string $createdAt = '',
     ) {
         $this->id = $this->id ? new Uuid($this->id) : Uuid::uuid4();

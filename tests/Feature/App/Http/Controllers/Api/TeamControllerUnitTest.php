@@ -4,7 +4,7 @@ namespace Tests\Feature\App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\TeamController;
-use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\StoreTeamRequest;
 use App\Models\Team as TeamModel;
 use App\Repositories\Eloquent\TeamEloquentRepository;
 use Core\Domain\Repositories\TeamRepositoryInterface;
@@ -30,7 +30,7 @@ class TeamControllerUnitTest extends TestCase
     public function testShouldBeAbleToCreateANewTeam()
     {
         $createTeamUseCase = new CreateTeamUseCase($this->teamEloquentRepository);
-        $request = new StoreCategoryRequest();
+        $request = new StoreTeamRequest();
         $request->headers->set('Content-type', 'application/json');
         $request->setJson(new ParameterBag(['description' => 'Internacional']));
 

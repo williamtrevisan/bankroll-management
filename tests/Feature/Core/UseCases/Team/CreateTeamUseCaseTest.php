@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Core\UseCase\Team;
+namespace Tests\Feature\Core\UseCases\Team;
 
 use App\Models\Team as TeamModel;
 use App\Repositories\Eloquent\TeamEloquentRepository;
 use Core\UseCases\Team\CreateTeamUseCase;
-use Core\UseCases\Team\dtos\CreateTeamInputDTO;
-use Core\UseCases\Team\dtos\CreateTeamOutputDTO;
+use Core\UseCases\Team\dtos\Create\CreateTeamInputDTO;
+use Core\UseCases\Team\dtos\TeamOutputDTO;
 use Tests\TestCase;
 
 class CreateTeamUseCaseTest extends TestCase
@@ -19,7 +19,7 @@ class CreateTeamUseCaseTest extends TestCase
         $createTeamUseCase = new CreateTeamUseCase($teamEloquentRepository);
         $response = $createTeamUseCase->execute($createTeamInputDTO);
 
-        $this->assertInstanceOf(CreateTeamOutputDTO::class, $response);
+        $this->assertInstanceOf(TeamOutputDTO::class, $response);
         $this->assertEquals('Internacional', $response->description);
         $this->assertNotEmpty($response->id);
         $this->assertTrue($response->is_active);

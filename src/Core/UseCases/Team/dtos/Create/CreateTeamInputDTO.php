@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\UseCases\Team\dtos;
+namespace Core\UseCases\Team\dtos\Create;
 
 class CreateTeamInputDTO
 {
