@@ -10,14 +10,15 @@ use Throwable;
 
 class TeamUnitTest extends TestCase
 {
-    public function testMustHaveDescriptionAndIsActiveAttributes()
+    public function testMustHaveNameAndIsActiveAttributes()
     {
         $team = new Team(
-            description: 'Internacional',
+            id: '',
+            name: 'Internacional',
             isActive: true,
         );
 
-        $this->assertEquals('Internacional', $team->description);
+        $this->assertEquals('Internacional', $team->name);
         $this->assertTrue($team->isActive);
         $this->assertNotEmpty($team->id());
         $this->assertNotEmpty($team->createdAt());
@@ -26,17 +27,19 @@ class TeamUnitTest extends TestCase
     public function testShouldBeAbleInstantiateTeamClassWithIsActiveTrueByDefault()
     {
         $team = new Team(
-            description: 'Internacional',
+            id: '',
+            name: 'Internacional',
         );
 
         $this->assertTrue($team->isActive);
     }
 
-    public function testMustReturnExceptionIfLengthDescriptionIsLowerThan2()
+    public function testMustReturnExceptionIfLengthNameIsLowerThan2()
     {
         try {
             new Team(
-                description: random_bytes(1),
+                id: '',
+                name: random_bytes(1),
             );
 
             $this->assertTrue(false);
@@ -44,16 +47,17 @@ class TeamUnitTest extends TestCase
             $this->assertInstanceOf(
                 EntityValidationException::class,
                 $th,
-                'Description must greater than 255 or lower than 2.'
+                'Name must greater than 255 or lower than 2.'
             );
         }
     }
 
-    public function testMustReturnExceptionIfLengthDescriptionIsGreaterThan255()
+    public function testMustReturnExceptionIfLengthNameIsGreaterThan255()
     {
         try {
             new Team(
-                description: random_bytes(256),
+                id: '',
+                name: random_bytes(256),
             );
 
             $this->assertTrue(false);
@@ -61,7 +65,7 @@ class TeamUnitTest extends TestCase
             $this->assertInstanceOf(
                 EntityValidationException::class,
                 $th,
-                'Description must greater than 255 or lower than 2.'
+                'Name must greater than 255 or lower than 2.'
             );
         }
     }
@@ -69,7 +73,8 @@ class TeamUnitTest extends TestCase
     public function testShouldBeAbleToDisableATeam()
     {
         $team = new Team(
-            description: 'Internacional',
+            id: '',
+            name: 'Internacional',
             isActive: true,
         );
 
@@ -81,7 +86,8 @@ class TeamUnitTest extends TestCase
     public function testShouldBeAbleToEnableATeam()
     {
         $team = new Team(
-            description: 'Internacional',
+            id: '',
+            name: 'Internacional',
             isActive: true,
         );
         $team->disable();
@@ -96,15 +102,15 @@ class TeamUnitTest extends TestCase
         $uuid = Uuid::uuid4()->toString();
 
         $team = new Team(
-            description: 'Internacional',
-            isActive: true,
             id: $uuid,
+            name: 'Internacional',
+            isActive: true,
             createdAt: '2023-01-01 12:13:12'
         );
 
         $team->update('Palmeiras');
 
         $this->assertEquals($uuid, $team->id());
-        $this->assertEquals('Palmeiras', $team->description);
+        $this->assertEquals('Palmeiras', $team->name);
     }
 }

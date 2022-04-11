@@ -33,7 +33,7 @@ class ListTeamUseCaseUnitTest extends TestCase
         $response = $listTeamUseCase->execute($teamInputDTO);
 
         $this->assertInstanceOf(TeamOutputDTO::class, $response);
-        $this->assertEquals('Internacional', $response->description);
+        $this->assertEquals('Internacional', $response->name);
         $this->assertEquals($uuid, $response->id);
     }
 

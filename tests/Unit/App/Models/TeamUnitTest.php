@@ -26,7 +26,7 @@ class TeamUnitTest extends ModelTestCase
     {
         return [
             'id',
-            'description',
+            'name',
             'is_active'
         ];
     }

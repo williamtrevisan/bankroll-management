@@ -20,6 +20,6 @@ class ListTeamUseCaseUnitTest extends TestCase
         $response = $listTeamUseCase->execute($teamInputDTO);
 
         $this->assertEquals($databaseTeam->id, $response->id);
-        $this->assertEquals($databaseTeam->description, $response->description);
+        $this->assertEquals($databaseTeam->name, $response->name);
     }
 }

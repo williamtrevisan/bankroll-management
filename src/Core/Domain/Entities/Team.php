@@ -13,7 +13,7 @@ class Team
 
     public function __construct (
         protected Uuid|string $id = '',
-        protected string $description = '',
+        protected string $name = '',
         protected bool $isActive = true,
         protected DateTime|string $createdAt = '',
     ) {
@@ -36,16 +36,16 @@ class Team
         $this->isActive = true;
     }
 
-    public function update(string $description): void
+    public function update(string $name): void
     {
-        $this->description = $description;
+        $this->name = $name;
 
         $this->validate();
     }
 
     private function validate(): void
     {
-        DomainValidation::lowerThan($this->description);
-        DomainValidation::greaterThan($this->description);
+        DomainValidation::lowerThan($this->name);
+        DomainValidation::greaterThan($this->name);
     }
 }

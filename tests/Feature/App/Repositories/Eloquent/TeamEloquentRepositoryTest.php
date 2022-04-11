@@ -14,13 +14,13 @@ class TeamEloquentRepositoryTest extends TestCase
     {
         $teamEloquentRepository = new TeamEloquentRepository(new TeamModel());
         $teamEntity = new TeamEntity(
-            description: 'Internacional',
+            name: 'Internacional',
         );
 
         $response = $teamEloquentRepository->create($teamEntity);
 
         $this->assertInstanceOf(TeamRepositoryInterface::class, $teamEloquentRepository);
         $this->assertInstanceOf(TeamEntity::class, $response);
-        $this->assertDatabaseHas('teams', ['description' => $teamEntity->description]);
+        $this->assertDatabaseHas('teams', ['name' => $teamEntity->name]);
     }
 }

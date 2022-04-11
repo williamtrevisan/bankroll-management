@@ -21,7 +21,7 @@ class TeamController extends Controller
     public function store(StoreTeamRequest $request, CreateTeamUseCase $createTeamUseCase): JsonResponse
     {
         $createTeamInputDTO = new CreateTeamInputDTO(
-            description: $request->description,
+            name: $request->name,
             isActive: (bool) $request->is_active ?? true
         );
 
@@ -44,7 +44,7 @@ class TeamController extends Controller
         UpdateTeamUseCase $updateTeamUseCase,
         string $id
     ): JsonResponse {
-        $updateTeamInputDTO = new UpdateTeamInputDTO(id: $id, description: $request->description);
+        $updateTeamInputDTO = new UpdateTeamInputDTO(id: $id, name: $request->name);
 
         $response = $updateTeamUseCase->execute($updateTeamInputDTO);
 

@@ -18,7 +18,7 @@ class ListTeamUseCase
 
         return new TeamOutputDTO(
             id: $team->id(),
-            description: $team->description,
+            name: $team->name,
             is_active: $team->isActive,
             created_at: $team->createdAt(),
         );

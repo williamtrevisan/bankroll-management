@@ -20,7 +20,7 @@ class TeamApiTest extends TestCase
         $response->assertJsonStructure([
             'message',
             'errors' => [
-                'description'
+                'name'
             ]
         ]);
     }
@@ -28,13 +28,13 @@ class TeamApiTest extends TestCase
     public function testShouldBeAbleToCreateANewTeam()
     {
         $data = [
-            'description' => 'Internacional'
+            'name' => 'Internacional'
         ];
 
         $response = $this->postJson($this->endpoint, $data);
 
         $response->assertStatus(Response::HTTP_CREATED);
-        $this->assertEquals('Internacional', $response['data']['description']);
+        $this->assertEquals('Internacional', $response['data']['name']);
         $this->assertFalse($response['data']['is_active']);
         $this->assertDatabaseHas('teams', [
             'id' => $response['data']['id'],
@@ -52,9 +52,6 @@ class TeamApiTest extends TestCase
     public function testShouldBeAbleToShowATeam()
     {
         $team = Team::factory()->create();
-        $data = [
-            'description' => 'Internacional',
-        ];
 
         $response = $this->getJson("$this->endpoint/$team->id");
 
@@ -62,7 +59,7 @@ class TeamApiTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 'id',
-                'description',
+                'name',
                 'is_active',
                 'created_at',
             ]
@@ -80,7 +77,7 @@ class TeamApiTest extends TestCase
         $response->assertJsonStructure([
             'message',
             'errors' => [
-                'description'
+                'name'
             ]
         ]);
     }
@@ -88,7 +85,7 @@ class TeamApiTest extends TestCase
     public function testMustBeReturnHttpNotFoundIfReceiveInvalidIdForUpdateMethod()
     {
         $data = [
-            'description' => 'Internacional',
+            'name' => 'Internacional',
         ];
 
         $response = $this->putJson("$this->endpoint/fake_id", $data);
@@ -100,7 +97,7 @@ class TeamApiTest extends TestCase
     {
         $team = Team::factory()->create();
         $data = [
-            'description' => 'Internacional',
+            'name' => 'Internacional',
         ];
 
         $response = $this->putJson("$this->endpoint/$team->id", $data);
@@ -109,13 +106,13 @@ class TeamApiTest extends TestCase
         $response->assertJsonStructure([
             'data' => [
                 'id',
-                'description',
+                'name',
                 'is_active',
                 'created_at',
             ]
         ]);
         $this->assertDatabaseHas('teams', [
-            'description' => 'Internacional'
+            'name' => 'Internacional'
         ]);
     }
 

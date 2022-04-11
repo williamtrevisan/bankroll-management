@@ -6,7 +6,7 @@ class UpdateTeamInputDTO
 {
     public function __construct(
         public string $id,
-        public string $description,
+        public string $name,
         public bool $is_active = true
     ) {}
 }

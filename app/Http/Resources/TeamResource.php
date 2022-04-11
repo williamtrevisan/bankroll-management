@@ -17,7 +17,7 @@ class TeamResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'description' => $this->description,
+            'name' => $this->name,
             'is_active' => $this->is_active,
             'created_at' => Carbon::make($this->created_at)->format('Y-m-d H:i:s'),
         ];

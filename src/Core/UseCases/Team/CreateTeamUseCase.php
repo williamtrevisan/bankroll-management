@@ -17,7 +17,7 @@ class CreateTeamUseCase
     {
         $data = new Team(
             id: '',
-            description: $input->description,
+            name: $input->name,
             isActive: $input->isActive,
         );
 
@@ -25,7 +25,7 @@ class CreateTeamUseCase
 
         return new TeamOutputDTO(
             id: $team->id(),
-            description: $team->description,
+            name: $team->name,
             is_active: $team->isActive,
             created_at: $team->createdAt(),
         );

@@ -30,7 +30,7 @@ class DomainValidationUnitTest extends TestCase
     {
         try {
             $value = random_bytes(256);
-            $message = 'Description must not be greater than 255 characters.';
+            $message = 'Name must not be greater than 255 characters.';
 
             DomainValidation::greaterThan($value, $message);
 
@@ -39,7 +39,7 @@ class DomainValidationUnitTest extends TestCase
             $this->assertInstanceOf(
                 EntityValidationException::class,
                 $th,
-                'Description must not be greater than 255 characters.'
+                'Name must not be greater than 255 characters.'
             );
         }
     }
@@ -65,7 +65,7 @@ class DomainValidationUnitTest extends TestCase
     {
         try {
             $value = random_bytes(1);
-            $message = 'Description must not be lower than 2 characters.';
+            $message = 'Name must not be lower than 2 characters.';
 
             DomainValidation::lowerThan($value, $message);
 
@@ -74,7 +74,7 @@ class DomainValidationUnitTest extends TestCase
             $this->assertInstanceOf(
                 EntityValidationException::class,
                 $th,
-                'Description must not be lower than 2 characters.'
+                'Name must not be lower than 2 characters.'
             );
         }
     }

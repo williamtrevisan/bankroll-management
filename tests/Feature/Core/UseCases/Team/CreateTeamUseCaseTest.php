@@ -20,7 +20,7 @@ class CreateTeamUseCaseTest extends TestCase
         $response = $createTeamUseCase->execute($createTeamInputDTO);
 
         $this->assertInstanceOf(TeamOutputDTO::class, $response);
-        $this->assertEquals('Internacional', $response->description);
+        $this->assertEquals('Internacional', $response->name);
         $this->assertNotEmpty($response->id);
         $this->assertTrue($response->is_active);
         $this->assertDatabaseHas('teams', ['id' => $response->id]);

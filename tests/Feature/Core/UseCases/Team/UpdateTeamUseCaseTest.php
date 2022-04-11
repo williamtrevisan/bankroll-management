@@ -17,14 +17,14 @@ class UpdateTeamUseCaseTest extends TestCase
         $teamRepository = new TeamEloquentRepository(new TeamModel());
         $updateTeamInputDTO = new UpdateTeamInputDTO(
             id: $databaseTeam->id,
-            description: 'Updated description'
+            name: 'Updated name'
         );
 
         $updateTeamUseCase = new UpdateTeamUseCase($teamRepository);
         $response = $updateTeamUseCase->execute($updateTeamInputDTO);
 
         $this->assertInstanceOf(TeamOutputDTO::class, $response);
-        $this->assertEquals('Updated description', $response->description);
-        $this->assertDatabaseHas('teams', ['description' => $response->description]);
+        $this->assertEquals('Updated name', $response->name);
+        $this->assertDatabaseHas('teams', ['name' => $response->name]);
     }
 }

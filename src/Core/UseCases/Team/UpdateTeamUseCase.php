@@ -16,14 +16,14 @@ class UpdateTeamUseCase
     {
         $team = $this->teamRepository->findByPk($input->id);
         $team->update(
-            description: $input->description ?? $team->description
+            name: $input->name ?? $team->name
         );
 
         $teamUpdated = $this->teamRepository->update($team);
 
         return new TeamOutputDTO(
             id: $teamUpdated->id,
-            description: $teamUpdated->description,
+            name: $teamUpdated->name,
             is_active: $teamUpdated->isActive,
             created_at: $teamUpdated->createdAt()
         );

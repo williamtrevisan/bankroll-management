@@ -12,7 +12,7 @@ abstract class ModelTestCase extends TestCase
     abstract protected function getExpectedFillables(): array;
     abstract protected function getExpectedCasts(): array;
 
-    public function testMustTeamModelUseHasFactoryAndSoftDeletesTraits()
+    public function testMustModelUseTraitsLikeExpected()
     {
         $traitsExpected = $this->getExpectedTraits();
         $teamModelTraits = class_uses($this->getModel());
@@ -20,14 +20,14 @@ abstract class ModelTestCase extends TestCase
         $this->assertEqualsCanonicalizing($traitsExpected, $teamModelTraits);
     }
 
-    public function testMustTeamModelHaveAImplementingPropertyLikeFalse()
+    public function testMustModelHaveAImplementingPropertyFalse()
     {
         $teamModelIncrementingProperty = $this->getModel()->incrementing;
 
         $this->assertFalse($teamModelIncrementingProperty);
     }
 
-    public function testMustTeamModelHaveIdDescriptionAndIsActiveOnFillableProperty()
+    public function testMustModelHaveFillablePropertyLikeExpected()
     {
         $fillablesExpected = $this->getExpectedFillables();
         $teamModelFillables = $this->getModel()->getFillable();
@@ -35,7 +35,7 @@ abstract class ModelTestCase extends TestCase
         $this->assertEquals($fillablesExpected, $teamModelFillables);
     }
 
-    public function testMustTeamModelHaveCastsForIdIsActiveAndDeletedAt()
+    public function testMustModelHaveCastsLikeExpected()
     {
         $castsExpected = $this->getExpectedCasts();
         $teamModelCasts = $this->getModel()->getCasts();

@@ -17,7 +17,7 @@ class TeamEloquentRepository implements TeamRepositoryInterface
     {
         $team = $this->teamModel->create([
             'id' => $team->id(),
-            'description' => $team->description,
+            'name' => $team->name,
             'is_active' => $team->isActive,
             'created_at' => $team->createdAt(),
         ]);
@@ -43,7 +43,7 @@ class TeamEloquentRepository implements TeamRepositoryInterface
         }
 
         $databaseTeam->update([
-            'description' => $team->description,
+            'name' => $team->name,
             'is_active' => $team->isActive,
         ]);
         $databaseTeam->refresh();
@@ -65,7 +65,7 @@ class TeamEloquentRepository implements TeamRepositoryInterface
     {
         $teamEntity = new TeamEntity(
             id: $object->id,
-            description: $object->description,
+            name: $object->name,
         );
         $object->is_active ? $teamEntity->enable() : $teamEntity->disable();
 

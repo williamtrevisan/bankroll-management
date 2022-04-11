@@ -19,7 +19,7 @@ class TeamFactory extends Factory
     {
         return [
             'id' => (string) Str::uuid(),
-            'description' => $this->faker->sentence(10),
+            'name' => $this->faker->sentence(10),
             'is_active' => true
         ];
     }

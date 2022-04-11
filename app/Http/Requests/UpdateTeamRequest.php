@@ -24,7 +24,7 @@ class UpdateTeamRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => [
+            'name' => [
                 'required',
                 'min:2',
                 'max:255',
