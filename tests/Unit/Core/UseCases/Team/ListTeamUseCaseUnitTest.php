@@ -14,7 +14,7 @@ use stdClass;
 
 class ListTeamUseCaseUnitTest extends TestCase
 {
-    public function testShouldBeAbleToUpdateATeam()
+    public function testShouldBeAbleToListATeam()
     {
         $uuid = Uuid::uuid4()->toString();
         $teamEntity = Mockery::mock(Team::class, [
@@ -37,7 +37,7 @@ class ListTeamUseCaseUnitTest extends TestCase
         $this->assertEquals($uuid, $response->id);
     }
 
-    public function testShouldBeAbleToSpyIfFindByPkAndUpdateMethodsHasBeenCalled()
+    public function testShouldBeAbleToSpyIfFindByPkMethodsHasBeenCalled()
     {
         $uuid = Uuid::uuid4()->toString();
         $teamEntity = Mockery::mock(Team::class, [
