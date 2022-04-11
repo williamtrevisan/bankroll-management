@@ -18,30 +18,25 @@ use Illuminate\Http\Response;
 
 class TeamController extends Controller
 {
-    public function store(
-        StoreTeamRequest $request,
-        CreateTeamUseCase $createTeamUseCase
-    ): JsonResponse {
-        $response = $createTeamUseCase->execute(
-            input: new CreateTeamInputDTO(
-                description: $request->description,
-                isActive: (bool) $request->is_active ?? true,
-            )
+    public function store(StoreTeamRequest $request, CreateTeamUseCase $createTeamUseCase): JsonResponse
+    {
+        $createTeamInputDTO = new CreateTeamInputDTO(
+            description: $request->description,
+            isActive: (bool) $request->is_active ?? true
         );
 
-        return (new TeamResource($response))
-            ->response()
-            ->setStatusCode(Response::HTTP_CREATED);
+        $response = $createTeamUseCase->execute($createTeamInputDTO);
+
+        return (new TeamResource($response))->response()->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function show(
-        ListTeamUseCase $listTeamUseCase,
-        string $id
-    ): JsonResponse {
-        $team = $listTeamUseCase->execute(new TeamInputDTO($id));
+    public function show(ListTeamUseCase $listTeamUseCase, string $id): JsonResponse
+    {
+        $teamInputDTO = new TeamInputDTO(id: $id);
 
-        return (new TeamResource($team))
-            ->response();
+        $team = $listTeamUseCase->execute($teamInputDTO);
+
+        return (new TeamResource($team))->response();
     }
 
     public function update(
@@ -49,22 +44,18 @@ class TeamController extends Controller
         UpdateTeamUseCase $updateTeamUseCase,
         string $id
     ): JsonResponse {
-        $response = $updateTeamUseCase->execute(
-            input: new UpdateTeamInputDTO(
-                id: $id,
-                description: $request->description
-            )
-        );
+        $updateTeamInputDTO = new UpdateTeamInputDTO(id: $id, description: $request->description);
 
-        return (new TeamResource($response))
-            ->response();
+        $response = $updateTeamUseCase->execute($updateTeamInputDTO);
+
+        return (new TeamResource($response))->response();
     }
 
-    public function destroy(
-        DeleteTeamUseCase $deleteTeamUseCase,
-        string $id
-    ): Response {
-        $deleteTeamUseCase->execute(new TeamInputDTO($id));
+    public function destroy(DeleteTeamUseCase $deleteTeamUseCase, string $id): Response
+    {
+        $teamInputDTO = new TeamInputDTO(id: $id);
+
+        $deleteTeamUseCase->execute($teamInputDTO);
 
         return response()->noContent();
     }
