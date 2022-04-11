@@ -11,6 +11,7 @@ use Core\UseCases\Team\DeleteTeamUseCase;
 use Core\UseCases\Team\dtos\Create\CreateTeamInputDTO;
 use Core\UseCases\Team\dtos\TeamInputDTO;
 use Core\UseCases\Team\dtos\Update\UpdateTeamInputDTO;
+use Core\UseCases\Team\ListTeamUseCase;
 use Core\UseCases\Team\UpdateTeamUseCase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
@@ -31,6 +32,16 @@ class TeamController extends Controller
         return (new TeamResource($response))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+    public function show(
+        ListTeamUseCase $listTeamUseCase,
+        string $id
+    ): JsonResponse {
+        $team = $listTeamUseCase->execute(new TeamInputDTO($id));
+
+        return (new TeamResource($team))
+            ->response();
     }
 
     public function update(

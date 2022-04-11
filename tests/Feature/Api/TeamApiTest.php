@@ -42,6 +42,34 @@ class TeamApiTest extends TestCase
         ]);
     }
 
+    public function testMustBeReturnHttpNotFoundIfReceiveInvalidIdForShowMethod()
+    {
+        $response = $this->getJson("$this->endpoint/fake_id");
+
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
+    }
+
+    public function testShouldBeAbleToShowATeam()
+    {
+        $team = Team::factory()->create();
+        $data = [
+            'description' => 'Internacional',
+        ];
+
+        $response = $this->getJson("$this->endpoint/$team->id");
+
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJsonStructure([
+            'data' => [
+                'id',
+                'description',
+                'is_active',
+                'created_at',
+            ]
+        ]);
+        $this->assertEquals($team->id, $response['data']['id']);
+    }
+
     public function testMustBeReturnValidationsErrorWhenReceivedInvalidDataForUpdateMethod()
     {
         $team = Team::factory()->create();
